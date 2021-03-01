@@ -1,6 +1,6 @@
 # Style ‘We’ 프로젝트 Front-end/Back-end 소개
 
-![대표이미지](https://media.vlpt.us/images/mementomori/post/d38e8e72-342a-46c7-bfa6-ae0bb116bb92/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%209.40.17.png)
+![대표이미지](https://media.vlpt.us/images/mementomori/post/8ebba9b4-3ce9-4df4-8fdc-a59ce045046e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-02-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%209.14.27.png)
 
 ## 스타일쉐어 클론코딩 프로젝트
 
