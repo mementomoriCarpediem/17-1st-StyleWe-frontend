@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+
 import './TopFeedSection.scss';
+
 import ColumnList from './ColumnList';
 import TextOverImage from './TextOverImage';
 
@@ -68,10 +71,7 @@ export default class TopFeedSection extends Component {
               <p>팔로워</p>
               <p>24</p>
             </div>
-            <img
-              src="https://www.flaticon.com/svg/vstatic/svg/875/875068.svg?token=exp=1613445331~hmac=bcc6c406f4f5d836ba3b140bbd094f79"
-              alt="add"
-            />
+            <FaPlusCircle size={'30px'} style={{ marginRight: '10px' }} />
           </div>
           <div className="styleWe">
             <img src="images/image.png" alt="logo" />
@@ -99,10 +99,7 @@ export default class TopFeedSection extends Component {
               <p>팔로워</p>
               <p>10</p>
             </div>
-            <img
-              src="https://www.flaticon.com/svg/vstatic/svg/875/875068.svg?token=exp=1613445331~hmac=bcc6c406f4f5d836ba3b140bbd094f79"
-              alt="add"
-            />
+            <FaPlusCircle size={'30px'} style={{ marginRight: '10px' }} />
           </div>
           <div className="styleWe">
             <img src="images/image.png" alt="logo" />

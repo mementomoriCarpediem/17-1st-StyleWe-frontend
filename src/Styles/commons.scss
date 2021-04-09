@@ -1,21 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500&family=Roboto&display=swap");
-
-$border: 0.1rem solid #e8ebed;
-$border-radius: 5px;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500&family=Roboto&display=swap');
 
 html,
 body,
 * {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   box-sizing: content-box;
-}
-
-%flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 body {
   overflow-y: scroll;
+}
+
+$border: 0.1rem solid #e8ebed;
+$border-radius: 5px;
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

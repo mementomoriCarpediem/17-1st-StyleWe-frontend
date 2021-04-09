@@ -1,5 +1,7 @@
-
 import React, { Component } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { FaChevronUp } from 'react-icons/fa';
+
 import '../../Styles/commons.scss';
 import './CommunityMain.scss';
 
@@ -23,17 +25,20 @@ export default class CommnunityMain extends Component {
   };
 
   getData = () => {
-    const LIMIT = 30;
-    const { offset } = this.state;
+    // const LIMIT = 30;
+    // const { offset } = this.state;
 
-    fetch(`http://10.58.2.215:8000/feed?limit=${LIMIT}&offset=${offset}`)
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          feedContent: [...this.state.feedContent, ...data.feed_list],
+    // fetch(`http://10.58.2.215:8000/feed?limit=${LIMIT}&offset=${offset}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.setState({
+    //       feedContent: [...this.state.feedContent, ...data.feed_list],
+    //     });
+    //   });
 
-        });
-      });
+    fetch('/data/mockFeedData.json').then((res) =>
+      res.json().then((data) => this.setState({ feedContent: [...data] }))
+    );
   };
 
   componentDidMount() {
@@ -77,12 +82,10 @@ export default class CommnunityMain extends Component {
     });
   };
 
-
   handleFeedModal = (id) => {
     this.setState({
       isFeedDetailModalOpen: !this.state.isFeedDetailModalOpen,
       feedId: id,
-
     });
   };
 
@@ -116,7 +119,7 @@ export default class CommnunityMain extends Component {
 
           <p className="sectionTitle">지금의 트랜드</p>
           <div className="Feeds" style={{ height: `${feedContainerHeight}px` }}>
-            {feedContent.map((feed) => {
+            {/* {feedContent.map((feed) => {
               return (
                 <FeedUnit
                   id={feed.feed_basic_data?.feed_id}
@@ -131,18 +134,14 @@ export default class CommnunityMain extends Component {
                   handleFeedModal={this.handleFeedModal}
                 />
               );
-            })}
+            })} */}
           </div>
-
-          <img
-            src="https://www.flaticon.com/svg/vstatic/svg/992/992703.svg?token=exp=1614145828~hmac=fab6e6a27940e0f8d9d96bfbc29aa2fb"
-            alt="up"
+          <FaChevronUp
             className={'upScroll' + (isScollTopZero ? ` topEnd` : '')}
             onClick={this.goUp}
           />
-          <img
-            src="https://www.flaticon.com/svg/vstatic/svg/189/189689.svg?token=exp=1613538352~hmac=46f7b19be59420e6ad5cd995d78fa1ab"
-            alt="add"
+
+          <FaPlusCircle
             className="createContent"
             onClick={this.handleCreateModal}
           />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Signin from './Pages/Sign_in_up/signin';
 import Signup from './Pages/Sign_in_up/signup';
 import Signuplast from './Pages/Sign_in_up/signuplast';
@@ -18,7 +19,7 @@ class Routes extends React.Component {
           <Route exact path="/signuplast" component={Signuplast} />
           <Route exact path="/" component={CommunityMain} />
           <Route exact path="/feed" component={FeedDetail} />
-          {/* <Route exact path="/feed:id" component={FeedDetail} /> */}
+          {/* <Route exact path="/feed/:id" component={FeedDetail} /> */}
           <Route exact path="/upload" component={UploadContent} />
           <Route exact path="/product" component={ProductDetailPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
