@@ -12,9 +12,17 @@ body {
 }
 
 $border: 0.1rem solid #e8ebed;
+
 $border-radius: 5px;
+
 %flex-center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+%flex-space-between {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }

@@ -2,12 +2,6 @@
 @import '../../../Styles/reset.scss';
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
-%flex-space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .storeNav {
   position: fixed;
   z-index: 2000;
@@ -56,20 +50,18 @@
           display: flex;
           width: fit-content;
 
-          input {
+          button {
             margin: 0px 10px;
             padding: 3px 0px;
-            border: 0;
-            border-bottom: solid 2px transparent;
-            outline: none;
+            border: none;
             background-color: transparent;
             font-size: 16px;
             font-weight: bolder;
             cursor: pointer;
 
             &:focus {
+              outline: none;
               border-bottom: solid 2px black;
-              transition: all 0.5s linear;
             }
 
             &:hover {
@@ -220,43 +212,31 @@
       &:hover .detailMenuTab {
         position: absolute;
         top: -26px;
+        left: 0;
         display: flex;
         justify-content: center;
         background-color: white;
         color: black;
-        transition: all 0.3s linear;
         transform: translateY(100px);
-        animation-fill-mode: forwards;
       }
 
       .detailMenuTab {
         position: absolute;
         z-index: -1;
-        top: -33px;
         width: 100%;
-        background-color: transparent;
-        color: transparent;
-        border: transparent;
-        transition: all 0.3s ease-in-out;
-        transform: translateY(0px);
 
         .wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: row;
+          @extend %flex-center;
           flex-wrap: wrap;
           width: 48%;
-          height: inherit;
           margin: auto;
 
           .subCategory {
-            width: fit-content;
             margin: 20px 15px;
             font-size: 16px;
 
             &:hover {
-              font-weight: bolder;
+              font-weight: 700;
               cursor: pointer;
             }
           }

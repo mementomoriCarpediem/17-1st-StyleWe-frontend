@@ -1,10 +1,12 @@
 import React from 'react';
+import { FaDiceFive } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './StoreNav.scss';
 
 class StoreNav extends React.Component {
   constructor() {
     super();
+    this.inputRef = React.createRef();
     this.state = {
       categoriesData: [],
       searchInputValue: '',
@@ -15,10 +17,10 @@ class StoreNav extends React.Component {
   }
 
   componentDidMount() {
-    this.getCommentData();
+    this.getMenuData();
   }
 
-  getCommentData = () => {
+  getMenuData = () => {
     fetch('/data/navMenu.json')
       .then((res) => res.json())
       .then((data) => {
@@ -28,30 +30,19 @@ class StoreNav extends React.Component {
       });
   };
 
-  searchOnChangeEvent = (e) => {
+  handleSearchInput = (e) => {
     this.setState({
       searchInputValue: e.target.value,
     });
   };
 
-  handlePlaceholderEvent = () => {
+  handleSearchInputToggle = () => {
     this.setState({
-      isPlaceholder: true,
+      isPlaceholder: !this.state.isPlaceholder,
     });
-  };
-
-  handlePlaceholderBlurEvent = () => {
-    if (!this.state.searchInputValue) {
-      this.setState({
-        isPlaceholder: false,
-      });
+    if (!this.isPlaceholder) {
+      this.inputRef.current.value = '';
     }
-  };
-
-  handleDisplayMemberEvent = () => {
-    this.setState({
-      isLogin: !this.state.isLogin,
-    });
   };
 
   handleCategoriesMouseHover = (e) => {
@@ -70,8 +61,8 @@ class StoreNav extends React.Component {
             <div className="navMenuWrapper">
               <img className="logo" alt="Logo" src="/images/styleWeLogo.png" />
               <div className="menuWrapper">
-                <input type="submit" value="#OOTD" />
-                <input type="submit" value="STORE" />
+                <button>#OOTD</button>
+                <button>STORE</button>
               </div>
             </div>
             <div className="navSearchBarWrapper">
@@ -79,9 +70,10 @@ class StoreNav extends React.Component {
                 <input
                   className="searchInput"
                   type="search"
-                  onChange={this.searchOnChangeEvent}
-                  onClick={this.handlePlaceholderEvent}
-                  onBlur={this.handlePlaceholderBlurEvent}
+                  ref={this.inputRef}
+                  onChange={this.handleSearchInput}
+                  onClick={this.handleSearchInputToggle}
+                  onBlur={this.handleSearchInputToggle}
                 />
                 {!isPlaceholder && (
                   <div className="displayOnPlaceHolder">
@@ -103,12 +95,7 @@ class StoreNav extends React.Component {
                   src="/images/paperBagIcon.svg"
                 />
                 <Link to="/signin">
-                  <button
-                    className="signBtn"
-                    onClick={this.handleDisplayMemberEvent}
-                  >
-                    로그인/가입
-                  </button>
+                  <button className="signBtn">로그인/가입</button>
                 </Link>
               </div>
             ) : (
@@ -123,7 +110,6 @@ class StoreNav extends React.Component {
                   className="profileImageBtn"
                   alt="프로필 이미지"
                   src="/images/profileImage.png"
-                  onClick={this.handleDisplayMemberEvent}
                 />
               </div>
             )}
@@ -131,16 +117,15 @@ class StoreNav extends React.Component {
           <ul className="catergoiesSection">
             {categoriesData.map((mainCategory) => {
               return (
-                <>
+                <div key={mainCategory.id}>
                   <li
-                    key={mainCategory.id}
                     className="storeCategories"
                     onMouseEnter={this.handleCategoriesMouseHover}
                   >
                     {mainCategory.catergoriesName}
                   </li>
                   {hoverValue === mainCategory.catergoriesName &&
-                    mainCategory.subCatergoriesName !== [] && (
+                    mainCategory.subCatergoriesName[0] && (
                       <div
                         className="detailMenuTab"
                         onMouseLeave={this.handleCategoriesMouseHover}
@@ -156,12 +141,12 @@ class StoreNav extends React.Component {
                         </div>
                       </div>
                     )}
-                </>
+                </div>
               );
             })}
           </ul>
         </section>
-        <div className="hoverBackgroudColor"></div>
+        <div className="hoverBackgroudColor" />
       </nav>
     );
   }
