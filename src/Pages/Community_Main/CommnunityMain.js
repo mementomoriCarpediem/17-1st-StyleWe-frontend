@@ -36,9 +36,9 @@ export default class CommnunityMain extends Component {
     //     });
     //   });
 
-    fetch('/data/mockFeedData.json').then((res) =>
-      res.json().then((data) => this.setState({ feedContent: [...data] }))
-    );
+    fetch('/data/mockFeedData.json')
+      .then((res) => res.json())
+      .then((data) => this.setState({ feedContent: [...data] }));
   };
 
   componentDidMount() {
@@ -119,6 +119,23 @@ export default class CommnunityMain extends Component {
 
           <p className="sectionTitle">지금의 트랜드</p>
           <div className="Feeds" style={{ height: `${feedContainerHeight}px` }}>
+            {feedContent.map((feed) => {
+              return (
+                <FeedUnit
+                  key={feed.id}
+                  id={feed.id}
+                  username={feed.username}
+                  mainimg={feed.feedImages[0]}
+                  linkedProduct={feed.linkedProduct}
+                  feedtext={feed.FeedText}
+                  likedNumber={feed.LikedNumber}
+                  comments={feed.comments}
+                  commentsNum={feed.commentsNumber}
+                  createdTime={feed.createdTime}
+                  handleFeedModal={this.handleFeedModal}
+                />
+              );
+            })}
             {/* {feedContent.map((feed) => {
               return (
                 <FeedUnit

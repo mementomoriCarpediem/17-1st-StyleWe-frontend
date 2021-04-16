@@ -15,7 +15,6 @@ $feedUnitWidth: 220px;
   margin: 0 20px 20px 0;
   z-index: 2000;
 
-
   .mainImg {
     width: 100%;
     &:hover {
@@ -108,15 +107,18 @@ $feedUnitWidth: 220px;
 
         .topText {
           display: flex;
+          flex-direction: column;
           justify-content: space-between;
           margin: 0px 5px;
 
           span:first-child {
+            display: block;
             font-size: 15px;
             font-weight: 700;
           }
 
           span:last-child {
+            display: block;
             font-size: 13px;
             color: gray;
           }
@@ -133,7 +135,7 @@ $feedUnitWidth: 220px;
       }
 
       .icons {
-        img {
+        .icon {
           width: 13px;
           height: 13px;
           filter: opacity(0.2);

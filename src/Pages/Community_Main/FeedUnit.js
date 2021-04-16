@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { IoHeartOutline } from 'react-icons/io5';
+import { IoChatbubbleOutline } from 'react-icons/io5';
+import { IoFileTrayOutline } from 'react-icons/io5';
+
 import './FeedUnit.scss';
 import itemInfos from './itemInfos';
 import profileImgs from './profileImgs';
@@ -11,15 +15,14 @@ export default class FeedUnit extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      newItemArray: itemInfos.splice(0, this.state.itemNum),
-    });
+    this.getData();
   }
 
-  addComma = (num) => {
-    var regexp = /\B(?=(\d{3})+(?!\d))/g;
-    return num.toString().replace(regexp, ',');
-  };
+  getData() {
+    this.setState({
+      newItemArray: itemInfos.data.splice(0, this.state.itemNum),
+    });
+  }
 
   handleFeed = () => {
     this.props.handleFeedModal(this.props.id);
@@ -39,7 +42,7 @@ export default class FeedUnit extends Component {
     } = this.props;
 
     return (
-      <div className="FeedUnit">
+      <div className="FeedUnit" key={id}>
         <img
           className="mainImg"
           src={mainimg}
@@ -54,23 +57,20 @@ export default class FeedUnit extends Component {
               <p className="productName">{linkedProduct.product_name}</p>
               <p className="price">
                 <span className="new">
-                  {`${this.addComma(
-                    Math.round(
-                      linkedProduct.price * (1 - linkedProduct.discount_rate)
-                    )
-                  )} 원`}
+                  {`${(
+                    linkedProduct.price *
+                    (1 - linkedProduct.discount_rate)
+                  ).toLocaleString()} 원`}
                 </span>
-                <span className="old">{`${this.addComma(
-                  linkedProduct.price.split('.')[0]
-                )} 원`}</span>
+                <span className="old">{`${linkedProduct.price.toLocaleString()} 원`}</span>
               </p>
             </div>
           </section>
         )}
 
         {linkedProduct.product_name &&
-          this.state.newItemArray.map((item) => (
-            <section className="productInformation">
+          this.state.newItemArray.map((item, index) => (
+            <section key={index} className="productInformation">
               <div className="eachItem">
                 <img src={item.iconUrl} alt="icon" />
                 <div className="text">
@@ -91,34 +91,25 @@ export default class FeedUnit extends Component {
               </div>
               <div className="bottomText">{feedtext}</div>
               <div className="icons">
-                <img
-                  src="https://www.flaticon.com/svg/vstatic/svg/535/535234.svg?token=exp=1613459712~hmac=935c39c6a563cb7de13a57fea96e27f1"
-                  alt="like"
-                />
+                <IoHeartOutline className="icon" />
                 <span>{likedNumber}</span>
-                <img
-                  src="https://www.flaticon.com/svg/vstatic/svg/1946/1946412.svg?token=exp=1613459738~hmac=b547f11c148adcbdb8091f96eba8410d"
-                  alt="comment"
-                />
+                <IoChatbubbleOutline className="icon" />
                 <span>{commentsNum}</span>
-                <img
-                  src="https://www.flaticon.com/svg/vstatic/svg/747/747415.svg?token=exp=1613459784~hmac=2bf5999c77810265176b6788c1002937"
-                  alt="collection"
-                />
+                <IoFileTrayOutline className="icon" />
                 <span>16</span>
               </div>
             </div>
           </div>
         </section>
 
-        {comments.map((comment) => {
+        {comments.map((comment, index) => {
           if (comment.user) {
             return (
-              <div className="comments">
+              <div key={index} className="comments">
                 <img src={profileImgs[this.state.itemNum]} alt="profile" />
                 <div>
                   <p>
-                    <span>{comment.user}</span> {comment.content}
+                    <span>{comment.user}</span> {comment.comment}
                   </p>
                 </div>
               </div>

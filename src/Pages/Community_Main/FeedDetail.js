@@ -3,27 +3,29 @@ import { Link } from 'react-router-dom';
 import profileImgs from './profileImgs';
 import './FeedDetail.scss';
 
+import { IoArrowBackCircleOutline } from 'react-icons/io5';
+import { IoArrowForwardCircleOutline } from 'react-icons/io5';
+import { IoHeart } from 'react-icons/io5';
+
 export default class FeedDetail extends Component {
   state = {
     isHoverOnImage: false,
     slideMove: 0,
-    feedData: [],
+    feedData: '',
     imgNum: Math.floor(Math.random() * 3 + 1),
   };
 
-  addComma = (num) => {
-    var regexp = /\B(?=(\d{3})+(?!\d))/g;
-    return num.toString().replace(regexp, ',');
-  };
-
   getData = () => {
-    fetch(`http://10.58.2.215:8000/feed/${this.props.feedId}`)
+    // fetch(`http://10.58.2.215:8000/feed/${this.props.feedId}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     this.setState({
+    //       feedData: data,
+    //     });
+    //   });
+    fetch('/data/mockFeedData.json')
       .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          feedData: data,
-        });
-      });
+      .then((data) => this.setState({ feedData: data }));
   };
 
   componentDidMount() {
@@ -87,12 +89,12 @@ export default class FeedDetail extends Component {
         <div className="leftContainer">
           <section className="carousel">
             <div className="topSection">
-              {feedData.feed_image_data &&
-                feedData.feed_image_data.map((image) => {
+              {feedData.feedImages &&
+                feedData.feedImages.map((image, index) => {
+                  console.log(image[index]);
                   return (
                     <img
-                      src={image.url}
-
+                      src={image[index]}
                       className="presentImg"
                       alt="presentImg"
                       style={{
@@ -104,7 +106,38 @@ export default class FeedDetail extends Component {
                   );
                 })}
 
-              <img
+              {/* {feedData.feed_image_data &&
+                feedData.feed_image_data.map((image) => {
+                  return (
+                    <img
+                      src={image.url}
+                      className="presentImg"
+                      alt="presentImg"
+                      style={{
+                        transform: `translateX(${slideMove}%)`,
+                      }}
+                      onMouseEnter={this.hoverImageOn}
+                      onMouseLeave={this.hoverImageOff}
+                    />
+                  );
+                })} */}
+
+              <IoArrowBackCircleOutline
+                className={
+                  'arrow arrow-left' + (isHoverOnImage && ' hoverOnImage')
+                }
+                onMouseEnter={this.hoverImageOn}
+                onClick={this.prevImage}
+              />
+              <IoArrowForwardCircleOutline
+                className={
+                  'arrow arrow-right' + (isHoverOnImage && ' hoverOnImage')
+                }
+                onMouseEnter={this.hoverImageOn}
+                onClick={this.nextImage}
+              />
+
+              {/* <img
                 className={
                   'arrow arrow-left' + (isHoverOnImage && ' hoverOnImage')
                 }
@@ -112,8 +145,8 @@ export default class FeedDetail extends Component {
                 alt="leftArrow"
                 onMouseEnter={this.hoverImageOn}
                 onClick={this.prevImage}
-              />
-              <img
+              /> */}
+              {/* <img
                 className={
                   'arrow arrow-right' + (isHoverOnImage && ' hoverOnImage')
                 }
@@ -121,7 +154,7 @@ export default class FeedDetail extends Component {
                 alt="rightArrow"
                 onMouseEnter={this.hoverImageOn}
                 onClick={this.nextImage}
-              />
+              /> */}
             </div>
 
             <div className="bottomSection">
@@ -129,7 +162,6 @@ export default class FeedDetail extends Component {
                 feedData.feed_image_data.map((image, index) => {
                   return (
                     <img
-
                       src={image.url}
                       data-id={index}
                       alt="smallimage"
@@ -178,13 +210,13 @@ export default class FeedDetail extends Component {
                       <div>
                         <p className="productName">{product.product_name}</p>
                         <p className="price">
-                          {this.addComma(`${product.price?.split('.')[0]} 원`)}
+                          {`${product.price
+                            ?.split('.')[0]
+                            .toLocaleString()} 원`}
                           <span>
-                            {this.addComma(
-                              Math.round(
-                                product.price * (1 - product.discount_rate)
-                              )
-                            ) + '원'}
+                            {Math.round(
+                              product.price * (1 - product.discount_rate)
+                            ).toLocaleString() + '원'}
                           </span>
                         </p>
                       </div>
@@ -239,10 +271,7 @@ export default class FeedDetail extends Component {
 
           <section className="feedicons">
             <div>
-              <img
-                src="https://www.flaticon.com/svg/vstatic/svg/1077/1077086.svg?token=exp=1613994381~hmac=d6d142f3b5733fbc8570b1e69b05015e"
-                alt="heart"
-              />
+              <IoHeart />
               <span>{feedData.feed_basic_data?.like_number}</span>
             </div>
             <img

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FaTimes } from 'react-icons/fa';
+
 import './CreateModal.scss';
 
 export default class CreateModal extends Component {
@@ -29,9 +31,9 @@ export default class CreateModal extends Component {
       <div className="CreateModal">
         <div className="top">
           <p>업로드</p>
-          <img
-            src="https://www.flaticon.com/svg/vstatic/svg/748/748122.svg?token=exp=1613546046~hmac=b11675180900eff861173f8ea0b78727"
-            alt="close"
+          <FaTimes
+            size={25}
+            className="closeIcon"
             onClick={this.props.handleCreateModal}
           />
         </div>

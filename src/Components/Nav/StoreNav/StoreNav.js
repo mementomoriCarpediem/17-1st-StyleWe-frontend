@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaDiceFive } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './StoreNav.scss';
 
@@ -132,9 +131,11 @@ class StoreNav extends React.Component {
                       >
                         <div className="wrapper">
                           {mainCategory.subCatergoriesName.map(
-                            (subCategory) => {
+                            (subCategory, index) => {
                               return (
-                                <div className="subCategory">{subCategory}</div>
+                                <div key={index} className="subCategory">
+                                  {subCategory}
+                                </div>
                               );
                             }
                           )}
